@@ -5,4 +5,7 @@
     <string name="published_time">Published At</string>
     <string name="summary">Summary</string>
     <string name="search_hint">Search article by title</string>
+    <string name="your_recent_search">Your Recent Search</string>
+    <string name="empty_article_list">Empty Article List</string>
+    <string name="empty_recent_search">You don\'t have a searched article history.</string>
 </resources>

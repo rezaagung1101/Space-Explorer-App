@@ -1,5 +1,6 @@
 package com.prodia.test.spaceexplorer.viewModel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,40 +9,95 @@ import com.prodia.test.spaceexplorer.model.data.Article
 import com.prodia.test.spaceexplorer.model.data.RecentSearch
 import com.prodia.test.spaceexplorer.model.repository.ArticleRepository
 import kotlinx.coroutines.launch
+import java.net.UnknownHostException
 
 class ArticleViewModel(private val repository: ArticleRepository) : ViewModel() {
     private val _articles = MutableLiveData<List<Article>>()
     val articles: LiveData<List<Article>> = _articles
     private val _newsSites = MutableLiveData<List<String>>()
     val newsSites: LiveData<List<String>> = _newsSites
-//    private val _recentSearches = MutableLiveData<List<String>>()
-//    val recentSearches: LiveData<List<String>> = _recentSearches
     private val _recentSearches = repository.getRecentSearches()
     val recentSearches: LiveData<List<RecentSearch>> = _recentSearches
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+    private val _showNoInternetSnackbar = MutableLiveData<Boolean>()
+    val showNoInternetSnackbar: LiveData<Boolean>
+        get() = _showNoInternetSnackbar
 
-    fun getListArticles() {
+    fun getListArticles() =
         viewModelScope.launch {
-            _articles.value = repository.getListArticles()
+            try {
+                _isLoading.value = true
+                val response = repository.getListArticles()
+                if (response.isSuccessful) {
+                    _articles.value = response.body()!!.results
+                } else {
+                    Log.d("TAG", "GET Article Error Code: ${response.code()}")
+                }
+                _isLoading.value = false
+            } catch (e: UnknownHostException) {
+                Log.e("TAG", "Network error: ${e.message}")
+                setSnackBarValue(true)
+                _isLoading.value = false
+            }
         }
-    }
 
-    fun searchArticlesByTitle(title: String) {
+    fun searchArticlesByTitle(title: String) =
         viewModelScope.launch {
-            _articles.value = repository.searchArticlesByTitle(title)
-            repository.insertRecentSearch(title)
+            try {
+                _isLoading.value = true
+                val response = repository.searchArticlesByTitle(title)
+                if (response.isSuccessful) {
+                    _articles.value = response.body()!!.results
+                    repository.insertRecentSearch(title)
+                } else {
+                    Log.d("TAG", "GET Article Error Code: ${response.code()}")
+                }
+                _isLoading.value = false
+            } catch (e: UnknownHostException) {
+                Log.e("TAG", "Network error: ${e.message}")
+                setSnackBarValue(true)
+                _isLoading.value = false
+            }
         }
-    }
 
-    fun filterArticles(newsSite: String) {
+    fun filterArticles(newsSite: String) =
         viewModelScope.launch {
-            _articles.value = repository.filterArticles(newsSite)
+            try {
+                _isLoading.value = true
+                val response = repository.filterArticles(newsSite)
+                if (response.isSuccessful) {
+                    _articles.value = response.body()!!.results
+                } else {
+                    Log.d("TAG", "GET Article Error Code: ${response.code()}")
+                }
+                _isLoading.value = false
+            } catch (e: UnknownHostException) {
+                Log.e("TAG", "Network error: ${e.message}")
+                setSnackBarValue(true)
+                _isLoading.value = false
+            }
         }
-    }
 
-    fun getNewsSites() {
+    fun getNewsSites() =
         viewModelScope.launch {
-            _newsSites.value = repository.getNewsSites()
+            try {
+                _isLoading.value = true
+                val response = repository.getNewsSites()
+                if (response.isSuccessful) {
+                    _newsSites.value = response.body()
+                } else {
+                    Log.d("TAG", "GET News Site Error Code: ${response.code()}")
+                }
+                _isLoading.value = false
+            } catch (e: UnknownHostException) {
+                Log.e("TAG", "Network error: ${e.message}")
+                setSnackBarValue(true)
+                _isLoading.value = false
+            }
         }
-    }
 
+    fun setSnackBarValue(status: Boolean) {
+        _showNoInternetSnackbar.value = status
+    }
 }
