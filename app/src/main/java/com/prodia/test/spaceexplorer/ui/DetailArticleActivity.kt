@@ -3,6 +3,7 @@ package com.prodia.test.spaceexplorer.ui
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.prodia.test.spaceexplorer.databinding.ActivityDetailArticleBinding
 import com.prodia.test.spaceexplorer.model.data.Article
 import com.prodia.test.spaceexplorer.utils.Constants
@@ -16,10 +17,14 @@ class DetailArticleActivity : AppCompatActivity() {
         binding = ActivityDetailArticleBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val article = intent.getParcelableExtra<Article>(Constants.article) as Article
+        setupInformation(article)
     }
 
     private fun setupInformation(article: Article){
         binding.apply {
+            Glide.with(this@DetailArticleActivity)
+                .load(article.image_url)
+                .into(ivArticle)
             tvArticleTitle.text = article.title
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 tvPublishedTime.text = Helper.formatPublishedAt(article.published_at)
