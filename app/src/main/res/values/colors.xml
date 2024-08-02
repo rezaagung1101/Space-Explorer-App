@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="blue_dark">#9492F7</color>
     <color name="sky_blue">#5DB3ED</color>
     <color name="blue">#1994E6</color>
     <color name="background_card">#3CF8F5F8</color>

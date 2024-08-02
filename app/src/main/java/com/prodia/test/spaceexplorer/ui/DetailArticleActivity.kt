@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.prodia.test.spaceexplorer.R
 import com.prodia.test.spaceexplorer.databinding.ActivityDetailArticleBinding
 import com.prodia.test.spaceexplorer.model.data.Article
 import com.prodia.test.spaceexplorer.utils.Constants
@@ -18,6 +19,8 @@ class DetailArticleActivity : AppCompatActivity() {
         setContentView(binding.root)
         val article = intent.getParcelableExtra<Article>(Constants.article) as Article
         setupInformation(article)
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.title = getString(R.string.detail_article)
     }
 
     private fun setupInformation(article: Article){
@@ -32,6 +35,9 @@ class DetailArticleActivity : AppCompatActivity() {
                 tvPublishedTime.text = article.published_at
             }
             tvSummary.text = Helper.extractSummary(article.summary)
+            btnBack.setOnClickListener {
+                onBackPressed()
+            }
         }
     }
 }

@@ -8,4 +8,6 @@
     <string name="your_recent_search">Your Recent Search</string>
     <string name="empty_article_list">Empty Article List</string>
     <string name="empty_recent_search">You don\'t have a searched article history.</string>
+    <string name="detail_article">Detail Article</string>
+    <string name="back">Back</string>
 </resources>
