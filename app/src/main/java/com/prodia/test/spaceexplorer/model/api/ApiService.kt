@@ -17,9 +17,9 @@ interface ApiService {
         @Query("title_contains") title: String
     ): Response<ApiResponse>
 
-    @GET("articles")
-    suspend fun filterArticles(
-        @Query("news_site") newsSite: String
-    ): Response<ApiResponse>
+//    @GET("articles")
+//    suspend fun filterArticles(
+//        @Query("news_site") newsSite: String
+//    ): Response<ApiResponse>
 
 }

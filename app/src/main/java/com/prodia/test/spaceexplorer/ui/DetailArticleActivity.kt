@@ -1,5 +1,6 @@
 package com.prodia.test.spaceexplorer.ui
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +29,7 @@ class DetailArticleActivity : AppCompatActivity() {
             Glide.with(this@DetailArticleActivity)
                 .load(article.image_url)
                 .into(ivArticle)
+            tvNewsSite.text = article.news_site
             tvArticleTitle.text = article.title
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 tvPublishedTime.text = Helper.formatPublishedAt(article.published_at)
@@ -38,6 +40,12 @@ class DetailArticleActivity : AppCompatActivity() {
             btnBack.setOnClickListener {
                 onBackPressed()
             }
+            ivArticle.setOnClickListener {
+                val intent = Intent(this@DetailArticleActivity, ImageActivity::class.java)
+                intent.putExtra(Constants.imageUrl, article.image_url)
+                startActivity(intent)
+            }
         }
     }
+
 }

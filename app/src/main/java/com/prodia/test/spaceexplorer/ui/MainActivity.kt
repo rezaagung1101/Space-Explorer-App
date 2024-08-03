@@ -1,6 +1,7 @@
 package com.prodia.test.spaceexplorer.ui
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -76,8 +77,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        binding.btnSearch.setOnClickListener {
-            performSearch()
+        binding.btnRecentSearch.setOnClickListener {
+            startActivity(Intent(this, RecentSearchActivity::class.java))
         }
         binding.etSearchArticle.setOnEditorActionListener{ v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {

@@ -5,15 +5,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
-//@Parcelize
-//data class Article(
-//    val id: Int,
-//    val title: String,
-//    val summary: String,
-//    val published_at: String,
-//    val imageUrl: String,
-//    val news_site: String
-//): Parcelable
 @Parcelize
 data class Article(
     val id: Int,

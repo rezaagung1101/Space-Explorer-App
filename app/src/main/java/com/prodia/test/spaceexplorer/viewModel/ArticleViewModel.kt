@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.prodia.test.spaceexplorer.model.data.Article
 import com.prodia.test.spaceexplorer.model.data.RecentSearch
@@ -70,11 +69,14 @@ class ArticleViewModel(private val repository: ArticleRepository) : ViewModel() 
 
     fun filterArticles(newsSite: String) {
         if (newsSite == "All Categories") {
-            _filteredArticles.value = _articles.value // Tampilkan semua artikel
+            _filteredArticles.value = _articles.value
         } else {
             _filteredArticles.value = _articles.value?.filter { it.news_site == newsSite }
         }
     }
+
+    fun deleteAllRecentSearches() = repository.deleteAllRecentSearches()
+
 
     fun setSnackBarValue(status: Boolean) {
         _showNoInternetSnackbar.value = status

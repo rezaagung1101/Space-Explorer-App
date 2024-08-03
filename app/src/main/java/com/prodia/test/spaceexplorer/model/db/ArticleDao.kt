@@ -14,4 +14,7 @@ interface ArticleDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(recentSearch: RecentSearch)
+
+    @Query("DELETE FROM recent_search") // Ganti dengan nama tabel yang sesuai
+    fun deleteAllRecentSearches()
 }

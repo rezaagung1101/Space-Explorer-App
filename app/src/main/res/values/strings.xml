@@ -7,8 +7,19 @@
     <string name="search_hint">Search article</string>
     <string name="your_recent_search">Your Recent Search</string>
     <string name="empty_article_list">Empty Article List</string>
-    <string name="empty_recent_search">You don\'t have a searched article history.</string>
+    <string name="empty_recent_search">You don\'t have a search history.</string>
     <string name="detail_article">Detail Article</string>
     <string name="back">Back</string>
     <string name="search">Search</string>
+    <string name="recent">Recent Search</string>
+    <string name="recent_search_title">Search History</string>
+    <string name="delete_recent_search_list">Delete Recent Searches List</string>
+    <string name="delete_alert">Do you want to delete recent search list?</string>
+    <string name="no">No</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_success_message">Delete recent search list successfully</string>
+    <string name="news_site_category">News site category</string>
+    <string name="tap_image">Tap to full image</string>
+    <string name="fully_image_display">Article Image</string>
 </resources>
