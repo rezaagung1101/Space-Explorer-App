@@ -9,10 +9,9 @@ import retrofit2.http.Query
 interface ApiService {
     @GET("articles")
     suspend fun getListArticles(
-        @Query("limit") limit: Int = 10,
+        @Query("limit") limit: Int = 20,
         @Query("offset") offset: Int = 0
     ): Response<ApiResponse>
-
     @GET("articles")
     suspend fun searchArticlesByTitle(
         @Query("title_contains") title: String
@@ -23,6 +22,4 @@ interface ApiService {
         @Query("news_site") newsSite: String
     ): Response<ApiResponse>
 
-    @GET("news_sites")
-    suspend fun getNewsSites(): Response<List<String>>
 }

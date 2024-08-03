@@ -12,7 +12,6 @@ class ArticleRepository(private val apiService: ApiService, private val dao: Art
     suspend fun getListArticles() = apiService.getListArticles()
     suspend fun searchArticlesByTitle(title: String) = apiService.searchArticlesByTitle(title)
     suspend fun filterArticles(newsSite: String) = apiService.filterArticles(newsSite)
-    suspend fun getNewsSites() = apiService.getNewsSites()
 
     fun insertRecentSearch(query: String) = runBlocking {
         this.launch(Dispatchers.IO) {
