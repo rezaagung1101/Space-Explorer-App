@@ -1,5 +1,9 @@
 # Space Explorer App
 
+## Links
+- **Demo Video**: [Watch on YouTube](https://youtu.be/vwiLhgcFNBw)
+- **Download App**: [Download from Google Drive](https://drive.google.com/file/d/1ae6pkDtuKsLCol7aJg0VEUHAuG8RVe7-/view?usp=sharing)
+
 ## Description
 Space Explorer is a mobile application that allows users to explore and search for news articles from various sources. With a user-friendly interface, users can easily find articles based on their interests and keep track of their recent searches.
 
@@ -19,7 +23,3 @@ The application follows the MVVM (Model-View-ViewModel) architecture pattern, wh
 - **ViewModel**: Holds and manages UI-related data in a lifecycle-conscious way.
 - **Model**: Represents the data layer, including API services and local database.
 - **Repository**: Mediates between the data sources (API and local database) and the ViewModel.
-
-## Links
-- **Demo Video**: [Watch on YouTube](https://youtu.be/vwiLhgcFNBw)
-- **Download App**: [Download from Google Drive](https://drive.google.com/file/d/1ae6pkDtuKsLCol7aJg0VEUHAuG8RVe7-/view?usp=sharing)
