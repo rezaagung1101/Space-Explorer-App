@@ -19,7 +19,7 @@
         <gradient
             android:centerColor="@color/white"
             android:centerY="0.5"
-            android:endColor="@color/sky_blue"
+            android:endColor="@color/blue_dark"
             android:startColor="#00938c87"
             android:type="sweep"
             android:useLevel="false" />

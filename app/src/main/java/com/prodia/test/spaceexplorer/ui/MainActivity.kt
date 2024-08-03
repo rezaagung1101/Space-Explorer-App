@@ -1,9 +1,14 @@
 package com.prodia.test.spaceexplorer.ui
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.prodia.test.spaceexplorer.R
@@ -24,11 +29,21 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         getViewModel()
+        binding.swipeRefresh.setOnRefreshListener {
+            articleViewModel.getListArticles()
+            binding.swipeRefresh.isRefreshing = true
+            // Use a Handler to post a delayed action
+            Handler().postDelayed({
+                binding.swipeRefresh.isRefreshing = false
+                binding.rvArticles.smoothScrollToPosition(0)
+            }, 1000)
+        }
         articleViewModel.apply {
             getListArticles()
             articles.observe(this@MainActivity){ list ->
                 if (list!=null){
                     setupInformation(list)
+                    binding.tvEmptyList.alpha = 0f
                 } else{
                     binding.tvEmptyList.alpha = 1f
                 }
@@ -45,11 +60,22 @@ class MainActivity : AppCompatActivity() {
                     ).show()
                     // Reset the value to prevent showing the Snackbar repeatedly
                     this.setSnackBarValue(false)
+                    binding.tvEmptyList.alpha = 1f
                 }
             }
         }
+        binding.btnSearch.setOnClickListener {
+            performSearch()
+        }
+        binding.etSearchArticle.setOnEditorActionListener{ v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                performSearch()
+                true
+            } else {
+                false
+            }
+        }
     }
-
 
     private fun setupInformation(list: List<Article>){
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -57,6 +83,18 @@ class MainActivity : AppCompatActivity() {
         binding.rvArticles.adapter = ArticleListAdapter(list)
     }
 
+    private fun performSearch() {
+        val query = binding.etSearchArticle.text.toString().trim()
+        if (query.isNotEmpty()) {
+            articleViewModel.searchArticlesByTitle(query)
+            hideKeyboard()
+        }
+    }
+
+    private fun hideKeyboard() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+    }
 
     private fun getViewModel(): ArticleViewModel {
         val database = ArticleDatabase.getDatabase(this)
