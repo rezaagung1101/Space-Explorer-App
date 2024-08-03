@@ -11,7 +11,6 @@ import kotlinx.coroutines.runBlocking
 class ArticleRepository(private val apiService: ApiService, private val dao: ArticleDao) {
     suspend fun getListArticles() = apiService.getListArticles()
     suspend fun searchArticlesByTitle(title: String) = apiService.searchArticlesByTitle(title)
-//    suspend fun filterArticles(newsSite: String) = apiService.filterArticles(newsSite)
 
     fun insertRecentSearch(query: String) = runBlocking {
         this.launch(Dispatchers.IO) {

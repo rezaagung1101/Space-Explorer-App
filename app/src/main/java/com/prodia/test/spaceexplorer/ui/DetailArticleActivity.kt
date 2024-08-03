@@ -29,7 +29,7 @@ class DetailArticleActivity : AppCompatActivity() {
             Glide.with(this@DetailArticleActivity)
                 .load(article.image_url)
                 .into(ivArticle)
-            tvNewsSite.text = article.news_site
+            tvNewsSite.text = "©  " + article.news_site
             tvArticleTitle.text = article.title
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 tvPublishedTime.text = Helper.formatPublishedAt(article.published_at)

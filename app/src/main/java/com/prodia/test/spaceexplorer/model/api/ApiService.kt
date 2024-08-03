@@ -1,7 +1,5 @@
 package com.prodia.test.spaceexplorer.model.api
 
-//import retrofit2.Response/
-
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -17,9 +15,5 @@ interface ApiService {
         @Query("title_contains") title: String
     ): Response<ApiResponse>
 
-//    @GET("articles")
-//    suspend fun filterArticles(
-//        @Query("news_site") newsSite: String
-//    ): Response<ApiResponse>
 
 }
