@@ -18,7 +18,7 @@ object Helper {
     }
 
     fun extractSummary(summary: String): String {
-        return summary.substringBefore(". ")
+        return summary.substringBefore(". ") + "."
     }
 
     fun showDialog(
