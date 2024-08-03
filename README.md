@@ -1,7 +1,7 @@
 # Space Explorer App
 
 ## Description
-News Explorer is a mobile application that allows users to explore and search for news articles from various sources. With a user-friendly interface, users can easily find articles based on their interests and keep track of their recent searches.
+Space Explorer is a mobile application that allows users to explore and search for news articles from various sources. With a user-friendly interface, users can easily find articles based on their interests and keep track of their recent searches.
 
 ## Features
 - **Article List**: Display a list of news articles fetched from an API.
@@ -21,5 +21,5 @@ The application follows the MVVM (Model-View-ViewModel) architecture pattern, wh
 - **Repository**: Mediates between the data sources (API and local database) and the ViewModel.
 
 ## Links
-- **Demo Video**: [Watch on YouTube](<insert_youtube_link_here>)
-- **Download App**: [Download from Google Drive](<insert_google_drive_link_here>)
+- **Demo Video**: [Watch on YouTube](https://youtu.be/vwiLhgcFNBw)
+- **Download App**: [Download from Google Drive](https://drive.google.com/file/d/1ae6pkDtuKsLCol7aJg0VEUHAuG8RVe7-/view?usp=sharing)
