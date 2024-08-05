@@ -71,7 +71,6 @@ class MainActivity : AppCompatActivity() {
                         "No internet connection",
                         Snackbar.LENGTH_LONG
                     ).show()
-                    // Reset the value to prevent showing the Snackbar repeatedly
                     this.setSnackBarValue(false)
                     if (this.articles.value == null || this.articles.value!!.isEmpty()) binding.tvEmptyList.alpha = 1f
                 }
