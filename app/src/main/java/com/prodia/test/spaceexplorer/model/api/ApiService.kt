@@ -15,5 +15,4 @@ interface ApiService {
         @Query("title_contains") title: String
     ): Response<ApiResponse>
 
-
 }

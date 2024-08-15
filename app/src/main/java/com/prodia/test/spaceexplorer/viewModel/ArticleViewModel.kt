@@ -1,5 +1,6 @@
 package com.prodia.test.spaceexplorer.viewModel
 
+import android.accounts.NetworkErrorException
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -26,6 +27,11 @@ class ArticleViewModel(private val repository: ArticleRepository) : ViewModel() 
     val showNoInternetSnackbar: LiveData<Boolean>
         get() = _showNoInternetSnackbar
 
+    //added for test only
+    fun setArticles(articles: List<Article>) {
+        _articles.value = articles
+    }
+
     fun getListArticles() =
         viewModelScope.launch {
             try {
@@ -36,11 +42,11 @@ class ArticleViewModel(private val repository: ArticleRepository) : ViewModel() 
                     _articles.value = articles
                     _newsSites.value =  articles.map { it.news_site }.distinct()
                 } else {
-                    Log.d("TAG", "GET Article Error Code: ${response.code()}")
+//                    Log.d("TAG", "GET Article Error Code: ${response.code()}")
                 }
                 _isLoading.value = false
-            } catch (e: UnknownHostException) {
-                Log.e("TAG", "Network error: ${e.message}")
+            } catch (e: NetworkErrorException) {
+//                Log.e("TAG", "Network error: ${e.message}")
                 setSnackBarValue(true)
                 _isLoading.value = false
             }
@@ -57,11 +63,11 @@ class ArticleViewModel(private val repository: ArticleRepository) : ViewModel() 
                     _newsSites.value =  articles.map { it.news_site }.distinct()
                     repository.insertRecentSearch(title)
                 } else {
-                    Log.d("TAG", "GET Article Error Code: ${response.code()}")
+//                    Log.d("TAG", "GET Article Error Code: ${response.code()}")
                 }
                 _isLoading.value = false
-            } catch (e: UnknownHostException) {
-                Log.e("TAG", "Network error: ${e.message}")
+            } catch (e: NetworkErrorException) {
+//                Log.e("TAG", "Network error: ${e.message}")
                 setSnackBarValue(true)
                 _isLoading.value = false
             }
