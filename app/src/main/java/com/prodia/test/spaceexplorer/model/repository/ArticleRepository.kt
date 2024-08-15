@@ -9,7 +9,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class ArticleRepository(private val apiService: ApiService, private val dao: ArticleDao) {
+
     suspend fun getListArticles() = apiService.getListArticles()
+
     suspend fun searchArticlesByTitle(title: String) = apiService.searchArticlesByTitle(title)
 
     fun insertRecentSearch(query: String) = runBlocking {
@@ -23,6 +25,7 @@ class ArticleRepository(private val apiService: ApiService, private val dao: Art
             dao.deleteAllRecentSearches()
         }
     }
+
     fun getRecentSearches(): LiveData<List<RecentSearch>> {
         return dao.getRecentSearchList()
     }
