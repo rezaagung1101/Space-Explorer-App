@@ -3,6 +3,7 @@ package com.prodia.test.spaceexplorer.viewModel
 import android.accounts.NetworkErrorException
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.prodia.test.spaceexplorer.model.api.ApiResponse
 import com.prodia.test.spaceexplorer.model.repository.ArticleRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -20,6 +21,7 @@ import org.junit.Test
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
+import retrofit2.Response
 
 class ArticleViewModelTest {
 
@@ -29,9 +31,8 @@ class ArticleViewModelTest {
     private lateinit var articleRepository: ArticleRepository
     private lateinit var articleViewModel: ArticleViewModel
     private val dummyResponse = DummyData.getDummyResponse()
-    @OptIn(ExperimentalCoroutinesApi::class)
-    private val testDispatcher = TestCoroutineDispatcher()
 
+    private val testDispatcher = TestCoroutineDispatcher()
 
 
     @Before
@@ -69,9 +70,11 @@ class ArticleViewModelTest {
         articleViewModel.getListArticles()
         advanceUntilIdle()
 
-        assertEquals(true, articleViewModel.showNoInternetSnackbar.value) //check if SnackBar is shown
+        assertEquals(
+            true,
+            articleViewModel.showNoInternetSnackbar.value
+        ) //check if SnackBar is shown
         assertTrue(articleViewModel.articles.value.isNullOrEmpty()) //check if articles live data is null or empty
-
         articleViewModel.showNoInternetSnackbar.removeObserver(snackbarObserver) // cleanup
     }
 
@@ -100,15 +103,26 @@ class ArticleViewModelTest {
         articleViewModel.searchArticlesByTitle(query)
         advanceUntilIdle()
 
-        assertEquals(true, articleViewModel.showNoInternetSnackbar.value) //check if SnackBar is shown
+        assertEquals(
+            true,
+            articleViewModel.showNoInternetSnackbar.value
+        ) //check if SnackBar is shown
         assertTrue(articleViewModel.articles.value.isNullOrEmpty()) //check if articles live data is null or empty
-
         articleViewModel.showNoInternetSnackbar.removeObserver(snackbarObserver) // cleanup
     }
 
-    /**
-     * Check if articles null cz query is very random -> BELOM
-     */
+    @Test
+    fun `test searchArticlesByTitle with random query returns empty list`() = runBlockingTest {
+        val randomQuery = "randomquery123"
+        `when`(articleRepository.searchArticlesByTitle(randomQuery)).thenReturn(
+            Response.success(
+                ApiResponse(count = 0, next = null, previous = null, results = emptyList())
+            )
+        )
+        articleViewModel.searchArticlesByTitle(randomQuery)
+        advanceUntilIdle()
+        assertTrue(articleViewModel.articles.value.isNullOrEmpty())
+    }
 
     @Test
     fun `test deleteAllRecentSearches calls repository method`() {
@@ -120,7 +134,6 @@ class ArticleViewModelTest {
     fun `test setSnackBarValue updates snackbar LiveData`() {
         articleViewModel.setSnackBarValue(true)
         assertEquals(true, articleViewModel.showNoInternetSnackbar.value)
-
         articleViewModel.setSnackBarValue(false)
         assertEquals(false, articleViewModel.showNoInternetSnackbar.value)
     }
@@ -129,7 +142,6 @@ class ArticleViewModelTest {
     fun `test filterArticles with All Categories`() {
         articleViewModel.setArticles(DummyData.dummyArticles)
         articleViewModel.filterArticles("All Categories")
-
         assertEquals(DummyData.dummyArticles, articleViewModel.filteredArticles.value)
     }
 
@@ -137,8 +149,8 @@ class ArticleViewModelTest {
     fun `test filterArticles with specific news site`() {
         articleViewModel.setArticles(DummyData.dummyArticles)
         articleViewModel.filterArticles("Site B")
-
-        val expectedFilteredArticles = listOf(DummyData.dummyArticles[1])//contains Site B category only
+        val expectedFilteredArticles =
+            listOf(DummyData.dummyArticles[1])//contains Site B category only
         assertEquals(expectedFilteredArticles, articleViewModel.filteredArticles.value)
     }
 

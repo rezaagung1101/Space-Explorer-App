@@ -11,6 +11,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.prodia.test.spaceexplorer.adapter.ArticleListAdapter
@@ -22,7 +23,7 @@ import com.prodia.test.spaceexplorer.model.repository.ArticleRepository
 import com.prodia.test.spaceexplorer.viewModel.ArticleViewModel
 import com.prodia.test.spaceexplorer.viewModel.ArticleViewModelFactory
 
-class MainActivity : AppCompatActivity() {
+class MainActivity() : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val articleViewModel: ArticleViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -8,6 +8,7 @@ import com.prodia.test.spaceexplorer.model.data.RecentSearch
 import com.prodia.test.spaceexplorer.model.db.ArticleDao
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
+import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -42,17 +43,17 @@ class ArticleRepositoryTest {
     fun `test searchArticlesByTitle returns successful response`() = runBlockingTest {
         val dummyApiResponse = ApiResponse(count = 1, next = null, previous = null, results = emptyList())
         `when`(apiService.searchArticlesByTitle("dummy title")).thenReturn(Response.success(dummyApiResponse))
-
         val response = articleRepository.searchArticlesByTitle("dummy title")
-
         assertEquals(true, response.isSuccessful)
+        Assert.assertNotNull(response)
         assertEquals(dummyApiResponse, response.body())
     }
 
     @Test
     fun `test insertRecentSearch calls dao insert method`() = runBlocking {
-        articleRepository.insertRecentSearch("search query")
-        verify(articleDao).insert(RecentSearch(query = "search query"))
+        val query = "Indonesia"
+        articleRepository.insertRecentSearch(query)
+        verify(articleDao).insert(RecentSearch(query = query))
     }
 
     @Test
@@ -66,6 +67,7 @@ class ArticleRepositoryTest {
         val expectedLiveData: LiveData<List<RecentSearch>> = MutableLiveData(emptyList())
         `when`(articleDao.getRecentSearchList()).thenReturn(expectedLiveData)
         val result = articleRepository.getRecentSearches()
+        Assert.assertNotNull(result)
         assertEquals(expectedLiveData, result)
     }
 }

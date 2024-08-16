@@ -26,6 +26,5 @@ class ApiConfig { //for ApiService configuration and instantiation
             return retrofit.create(ApiService::class.java)
         }
     }
-    //
 
 }

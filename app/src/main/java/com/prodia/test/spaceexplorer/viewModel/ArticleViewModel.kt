@@ -39,7 +39,7 @@ class ArticleViewModel(private val repository: ArticleRepository) : ViewModel() 
                 val response = repository.getListArticles()
                 if (response.isSuccessful) {
                     val articles = response.body()!!.results
-                    _articles.value = articles
+                    setArticles(articles)
                     _newsSites.value =  articles.map { it.news_site }.distinct()
                 } else {
 //                    Log.d("TAG", "GET Article Error Code: ${response.code()}")
@@ -59,7 +59,7 @@ class ArticleViewModel(private val repository: ArticleRepository) : ViewModel() 
                 val response = repository.searchArticlesByTitle(title)
                 if (response.isSuccessful) {
                     val articles = response.body()!!.results
-                    _articles.value = articles
+                    setArticles(articles)
                     _newsSites.value =  articles.map { it.news_site }.distinct()
                     repository.insertRecentSearch(title)
                 } else {
