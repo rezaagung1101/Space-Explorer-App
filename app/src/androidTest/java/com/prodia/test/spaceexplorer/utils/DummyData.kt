@@ -1,7 +1,8 @@
-package com.prodia.test.spaceexplorer.viewModel
+package com.prodia.test.spaceexplorer.utils
 
 import com.prodia.test.spaceexplorer.model.api.ApiResponse
 import com.prodia.test.spaceexplorer.model.data.Article
+import com.prodia.test.spaceexplorer.model.data.RecentSearch
 import retrofit2.Response
 
 object DummyData {
@@ -22,6 +23,10 @@ object DummyData {
     val dummyArticles = listOf(
         dummyArticle,
         dummyArticle.copy(id = 2, title = "Dummy Title 2", news_site = "Site B")
+    )
+
+    val recentSearch = RecentSearch(
+        query = "Indonesia"
     )
 
     fun getDummyApiResponse(): ApiResponse {

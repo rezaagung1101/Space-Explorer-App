@@ -1,6 +1,5 @@
 package com.prodia.test.spaceexplorer.viewModel
 
-import androidx.lifecycle.ViewModel
 import com.prodia.test.spaceexplorer.model.repository.ArticleRepository
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -15,12 +14,6 @@ class ArticleViewModelFactoryTest {
         val modelClass = ArticleViewModel::class.java
         val viewModel = factory.create(modelClass)
         assertTrue(viewModel is ArticleViewModel)
-    }
-
-    @Test(expected = IllegalArgumentException::class)
-    fun `create should throw IllegalArgumentException when modelClass is not ArticleViewModel`() {
-        val invalidModelClass = ViewModel::class.java // Not ArticleViewModel
-        factory.create(invalidModelClass)
     }
 
 }

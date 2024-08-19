@@ -5,8 +5,9 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.prodia.test.spaceexplorer.model.api.ApiResponse
 import com.prodia.test.spaceexplorer.model.repository.ArticleRepository
+import com.prodia.test.spaceexplorer.utils.DummyData
+import com.prodia.test.spaceexplorer.utils.getOrAwaitValue
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
@@ -70,11 +71,11 @@ class ArticleViewModelTest {
         articleViewModel.getListArticles()
         advanceUntilIdle()
 
-        assertEquals(
-            true,
-            articleViewModel.showNoInternetSnackbar.value
-        ) //check if SnackBar is shown
-        assertTrue(articleViewModel.articles.value.isNullOrEmpty()) //check if articles live data is null or empty
+        val actualSnackbar = articleViewModel.showNoInternetSnackbar.value
+        val actualArticles = articleViewModel.articles.value
+        assertEquals(true, actualSnackbar) //check if SnackBar is shown
+        assertTrue(actualArticles.isNullOrEmpty()) //check if articles live data is null or empty
+
         articleViewModel.showNoInternetSnackbar.removeObserver(snackbarObserver) // cleanup
     }
 
@@ -103,11 +104,10 @@ class ArticleViewModelTest {
         articleViewModel.searchArticlesByTitle(query)
         advanceUntilIdle()
 
-        assertEquals(
-            true,
-            articleViewModel.showNoInternetSnackbar.value
-        ) //check if SnackBar is shown
-        assertTrue(articleViewModel.articles.value.isNullOrEmpty()) //check if articles live data is null or empty
+        val actualSnackbar = articleViewModel.showNoInternetSnackbar.value
+        val actualArticles = articleViewModel.articles.value
+        assertEquals(true, actualSnackbar) //check if SnackBar is shown
+        assertTrue(actualArticles.isNullOrEmpty()) //check if articles live data is null or empty
         articleViewModel.showNoInternetSnackbar.removeObserver(snackbarObserver) // cleanup
     }
 
@@ -121,7 +121,9 @@ class ArticleViewModelTest {
         )
         articleViewModel.searchArticlesByTitle(randomQuery)
         advanceUntilIdle()
-        assertTrue(articleViewModel.articles.value.isNullOrEmpty())
+
+        val actualArticles = articleViewModel.articles.value
+        assertTrue(actualArticles.isNullOrEmpty())
     }
 
     @Test
@@ -142,7 +144,8 @@ class ArticleViewModelTest {
     fun `test filterArticles with All Categories`() {
         articleViewModel.setArticles(DummyData.dummyArticles)
         articleViewModel.filterArticles("All Categories")
-        assertEquals(DummyData.dummyArticles, articleViewModel.filteredArticles.value)
+        val actualResult = articleViewModel.filteredArticles.value
+        assertEquals(DummyData.dummyArticles, actualResult)
     }
 
     @Test
@@ -151,7 +154,8 @@ class ArticleViewModelTest {
         articleViewModel.filterArticles("Site B")
         val expectedFilteredArticles =
             listOf(DummyData.dummyArticles[1])//contains Site B category only
-        assertEquals(expectedFilteredArticles, articleViewModel.filteredArticles.value)
+        val actualResult = articleViewModel.filteredArticles.value
+        assertEquals(expectedFilteredArticles, actualResult)
     }
 
 

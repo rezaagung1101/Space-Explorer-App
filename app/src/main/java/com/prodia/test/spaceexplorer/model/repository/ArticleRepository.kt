@@ -16,7 +16,7 @@ class ArticleRepository(private val apiService: ApiService, private val dao: Art
 
     fun insertRecentSearch(query: String) = runBlocking {
         this.launch(Dispatchers.IO) {
-            dao.insert(RecentSearch(query = query))
+            dao.insertRecentSearch(RecentSearch(query = query))
         }
     }
 

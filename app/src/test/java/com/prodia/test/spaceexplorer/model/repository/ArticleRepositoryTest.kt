@@ -53,7 +53,7 @@ class ArticleRepositoryTest {
     fun `test insertRecentSearch calls dao insert method`() = runBlocking {
         val query = "Indonesia"
         articleRepository.insertRecentSearch(query)
-        verify(articleDao).insert(RecentSearch(query = query))
+        verify(articleDao).insertRecentSearch(RecentSearch(query = query))
     }
 
     @Test

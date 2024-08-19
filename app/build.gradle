@@ -3,6 +3,11 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    id 'jacoco'
+}
+
+jacoco {
+    toolVersion = "0.8.7"
 }
 
 android {
@@ -23,6 +28,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            testCoverageEnabled = true
         }
     }
     compileOptions {
@@ -84,9 +92,11 @@ dependencies {
 
     // Coroutine Test
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2'
+    androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2'
 
     // AndroidX Test (LiveData)
     testImplementation 'androidx.arch.core:core-testing:2.1.0'
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
     androidTestImplementation 'androidx.test:core:1.5.0'
 
 

@@ -13,7 +13,7 @@ interface ArticleDao {
     fun getRecentSearchList(): LiveData<List<RecentSearch>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(recentSearch: RecentSearch)
+    fun insertRecentSearch(recentSearch: RecentSearch)
 
     @Query("DELETE FROM recent_search")
     fun deleteAllRecentSearches()
