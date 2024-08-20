@@ -83,7 +83,6 @@ class ArticleViewModel(private val repository: ArticleRepository) : ViewModel() 
 
     fun deleteAllRecentSearches() = repository.deleteAllRecentSearches()
 
-
     fun setSnackBarValue(status: Boolean) {
         _showNoInternetSnackbar.value = status
     }
