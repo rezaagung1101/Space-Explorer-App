@@ -7,6 +7,11 @@ import com.prodia.test.spaceexplorer.data.source.local.db.ArticleDatabase
 import com.prodia.test.spaceexplorer.data.source.remote.api.ApiConfig
 import com.prodia.test.spaceexplorer.data.source.remote.api.ApiService
 import com.prodia.test.spaceexplorer.domain.repository.ArticleRepository
+import com.prodia.test.spaceexplorer.domain.usecase.DeleteAllRecentSearchesUseCase
+import com.prodia.test.spaceexplorer.domain.usecase.GetListArticlesUseCase
+import com.prodia.test.spaceexplorer.domain.usecase.GetRecentSearchesUseCase
+import com.prodia.test.spaceexplorer.domain.usecase.InsertRecentSearchUseCase
+import com.prodia.test.spaceexplorer.domain.usecase.SearchArticlesByTitleUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,7 +22,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
     @Provides
     @Singleton
     fun provideApiService(): ApiService {
@@ -44,4 +48,45 @@ object AppModule {
     ): ArticleRepository {
         return ArticleRepositoryImpl(apiService, dao)
     }
+
+    @Provides
+    @Singleton
+    fun provideGetListArticlesUseCase(
+        articleRepository: ArticleRepository
+    ): GetListArticlesUseCase {
+        return GetListArticlesUseCase(articleRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSearchArticlesByTitleUseCase(
+        articleRepository: ArticleRepository
+    ): SearchArticlesByTitleUseCase {
+        return SearchArticlesByTitleUseCase(articleRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideInsertRecentSearchUseCase(
+        articleRepository: ArticleRepository
+    ): InsertRecentSearchUseCase {
+        return InsertRecentSearchUseCase(articleRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetRecentSearchUseCase(
+        articleRepository: ArticleRepository
+    ): GetRecentSearchesUseCase{
+        return GetRecentSearchesUseCase(articleRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDeleteAllRecentSearchesUseCase(
+        articleRepository: ArticleRepository
+    ): DeleteAllRecentSearchesUseCase {
+        return DeleteAllRecentSearchesUseCase(articleRepository)
+    }
+
 }
