@@ -1,4 +1,4 @@
-package com.prodia.test.spaceexplorer.ui
+package com.prodia.test.spaceexplorer.presentation.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

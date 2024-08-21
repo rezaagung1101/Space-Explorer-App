@@ -1,4 +1,4 @@
-package com.prodia.test.spaceexplorer.model.api
+package com.prodia.test.spaceexplorer.data.source.remote.api
 
 import retrofit2.Response
 import retrofit2.http.GET

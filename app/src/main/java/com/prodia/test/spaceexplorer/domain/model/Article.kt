@@ -1,4 +1,4 @@
-package com.prodia.test.spaceexplorer.model.data
+package com.prodia.test.spaceexplorer.domain.model
 
 import android.os.Parcelable
 import androidx.room.Entity

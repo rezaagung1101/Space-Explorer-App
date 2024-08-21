@@ -1,8 +1,8 @@
-package com.prodia.test.spaceexplorer.viewModel
+package com.prodia.test.spaceexplorer.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.prodia.test.spaceexplorer.model.repository.ArticleRepository
+import com.prodia.test.spaceexplorer.domain.repository.ArticleRepository
 
 class ArticleViewModelFactory(private val repository: ArticleRepository) :
     ViewModelProvider.NewInstanceFactory() {

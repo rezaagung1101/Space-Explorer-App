@@ -1,8 +1,8 @@
 package com.prodia.test.spaceexplorer.utils
 
-import com.prodia.test.spaceexplorer.model.api.ApiResponse
-import com.prodia.test.spaceexplorer.model.data.Article
-import com.prodia.test.spaceexplorer.model.data.RecentSearch
+import com.prodia.test.spaceexplorer.data.source.remote.api.ApiResponse
+import com.prodia.test.spaceexplorer.domain.model.Article
+import com.prodia.test.spaceexplorer.domain.model.RecentSearch
 import retrofit2.Response
 
 object DummyData {

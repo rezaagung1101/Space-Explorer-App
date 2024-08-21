@@ -1,4 +1,4 @@
-package com.prodia.test.spaceexplorer.ui
+package com.prodia.test.spaceexplorer.presentation.ui
 
 import android.os.Bundle
 import android.view.Menu
@@ -8,16 +8,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prodia.test.spaceexplorer.R
-import com.prodia.test.spaceexplorer.adapter.RecentSearchListAdapter
 import com.prodia.test.spaceexplorer.databinding.ActivityRecentSearchBinding
-import com.prodia.test.spaceexplorer.model.api.ApiConfig
-import com.prodia.test.spaceexplorer.model.data.RecentSearch
-import com.prodia.test.spaceexplorer.model.db.ArticleDatabase
-import com.prodia.test.spaceexplorer.model.repository.ArticleRepository
+import com.prodia.test.spaceexplorer.domain.model.RecentSearch
+import com.prodia.test.spaceexplorer.presentation.adapter.RecentSearchListAdapter
+import com.prodia.test.spaceexplorer.presentation.viewmodel.ArticleViewModel
 import com.prodia.test.spaceexplorer.utils.Helper
-import com.prodia.test.spaceexplorer.viewModel.ArticleViewModel
-import com.prodia.test.spaceexplorer.viewModel.ArticleViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RecentSearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRecentSearchBinding
     private val articleViewModel: ArticleViewModel by viewModels()
@@ -28,7 +26,7 @@ class RecentSearchActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         supportActionBar?.title = getString(R.string.recent_search_title)
-        getViewModel()
+//        getViewModel()
         articleViewModel.apply{
             recentSearches.observe(this@RecentSearchActivity){ recentSearches ->
                 if (recentSearches != null) {
@@ -49,16 +47,16 @@ class RecentSearchActivity : AppCompatActivity() {
         binding.rvArticles.adapter = RecentSearchListAdapter(recentSearches)
     }
 
-    private fun getViewModel(): ArticleViewModel {
-        val database = ArticleDatabase.getDatabase(this)
-        val repository = ArticleRepository(ApiConfig.getApiService(), database.articleDao())
-        val viewModel: ArticleViewModel by viewModels {
-            ArticleViewModelFactory(
-                repository
-            )
-        }
-        return viewModel
-    }
+//    private fun getViewModel(): ArticleViewModel {
+//        val database = ArticleDatabase.getDatabase(this)
+//        val repository = ArticleRepository(ApiConfig.getApiService(), database.articleDao())
+//        val viewModel: ArticleViewModel by viewModels {
+//            ArticleViewModelFactory(
+//                repository
+//            )
+//        }
+//        return viewModel
+//    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_detail, menu)

@@ -1,4 +1,4 @@
-package com.prodia.test.spaceexplorer.adapter
+package com.prodia.test.spaceexplorer.presentation.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.prodia.test.spaceexplorer.databinding.CardArticleItemBinding
-import com.prodia.test.spaceexplorer.model.data.Article
-import com.prodia.test.spaceexplorer.ui.DetailArticleActivity
+import com.prodia.test.spaceexplorer.domain.model.Article
+import com.prodia.test.spaceexplorer.presentation.ui.DetailArticleActivity
 import com.prodia.test.spaceexplorer.utils.Constants
 
 

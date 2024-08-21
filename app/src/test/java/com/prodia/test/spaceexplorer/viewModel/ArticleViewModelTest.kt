@@ -3,8 +3,9 @@ package com.prodia.test.spaceexplorer.viewModel
 import android.accounts.NetworkErrorException
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.prodia.test.spaceexplorer.model.api.ApiResponse
-import com.prodia.test.spaceexplorer.model.repository.ArticleRepository
+import com.prodia.test.spaceexplorer.data.source.remote.api.ApiResponse
+import com.prodia.test.spaceexplorer.domain.repository.ArticleRepository
+import com.prodia.test.spaceexplorer.presentation.viewmodel.ArticleViewModel
 import com.prodia.test.spaceexplorer.utils.DummyData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.TestCoroutineDispatcher

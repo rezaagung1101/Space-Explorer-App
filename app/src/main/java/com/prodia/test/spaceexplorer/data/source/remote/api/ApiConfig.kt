@@ -1,4 +1,4 @@
-package com.prodia.test.spaceexplorer.model.api
+package com.prodia.test.spaceexplorer.data.source.remote.api
 
 import com.prodia.test.spaceexplorer.BuildConfig
 import okhttp3.OkHttpClient

@@ -1,18 +1,19 @@
-package com.prodia.test.spaceexplorer.viewModel
+package com.prodia.test.spaceexplorer.presentation.viewmodel
 
 import android.accounts.NetworkErrorException
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.prodia.test.spaceexplorer.model.data.Article
-import com.prodia.test.spaceexplorer.model.data.RecentSearch
-import com.prodia.test.spaceexplorer.model.repository.ArticleRepository
+import com.prodia.test.spaceexplorer.domain.model.Article
+import com.prodia.test.spaceexplorer.domain.model.RecentSearch
+import com.prodia.test.spaceexplorer.domain.repository.ArticleRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.net.UnknownHostException
+import javax.inject.Inject
 
-class ArticleViewModel(private val repository: ArticleRepository) : ViewModel() {
+@HiltViewModel
+class ArticleViewModel @Inject constructor(private val repository: ArticleRepository) : ViewModel() {
     private val _filteredArticles = MutableLiveData<List<Article>>()
     val filteredArticles: LiveData<List<Article>> = _filteredArticles
     private val _articles = MutableLiveData<List<Article>>()

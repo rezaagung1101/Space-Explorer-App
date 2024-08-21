@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'jacoco'
+    id 'com.google.dagger.hilt.android'
 }
 
 jacoco {
@@ -99,5 +100,12 @@ dependencies {
     androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
     androidTestImplementation 'androidx.test:core:1.5.0'
 
+    // Dagger Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
+}
+
+kapt {
+    correctErrorTypes = true
 }

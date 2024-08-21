@@ -1,11 +1,11 @@
-package com.prodia.test.spaceexplorer.model.db
+package com.prodia.test.spaceexplorer.data.source.local.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.prodia.test.spaceexplorer.model.data.RecentSearch
+import com.prodia.test.spaceexplorer.domain.model.RecentSearch
 
 @Dao
 interface ArticleDao {

@@ -1,10 +1,10 @@
-package com.prodia.test.spaceexplorer.model.db
+package com.prodia.test.spaceexplorer.data.source.local.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.prodia.test.spaceexplorer.model.data.RecentSearch
+import com.prodia.test.spaceexplorer.domain.model.RecentSearch
 
 @Database(
     entities = [RecentSearch::class],

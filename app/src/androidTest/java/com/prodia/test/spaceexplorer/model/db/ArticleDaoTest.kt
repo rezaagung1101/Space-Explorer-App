@@ -3,6 +3,8 @@ package com.prodia.test.spaceexplorer.model.db
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
+import com.prodia.test.spaceexplorer.data.source.local.db.ArticleDao
+import com.prodia.test.spaceexplorer.data.source.local.db.ArticleDatabase
 import com.prodia.test.spaceexplorer.utils.DummyData
 import com.prodia.test.spaceexplorer.utils.getOrAwaitValue
 import kotlinx.coroutines.test.runTest

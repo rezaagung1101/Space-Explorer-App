@@ -1,4 +1,4 @@
-package com.prodia.test.spaceexplorer.ui
+package com.prodia.test.spaceexplorer.presentation.ui
 
 import android.content.Context
 import android.content.Intent
@@ -11,18 +11,15 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import com.prodia.test.spaceexplorer.adapter.ArticleListAdapter
 import com.prodia.test.spaceexplorer.databinding.ActivityMainBinding
-import com.prodia.test.spaceexplorer.model.api.ApiConfig
-import com.prodia.test.spaceexplorer.model.data.Article
-import com.prodia.test.spaceexplorer.model.db.ArticleDatabase
-import com.prodia.test.spaceexplorer.model.repository.ArticleRepository
-import com.prodia.test.spaceexplorer.viewModel.ArticleViewModel
-import com.prodia.test.spaceexplorer.viewModel.ArticleViewModelFactory
+import com.prodia.test.spaceexplorer.domain.model.Article
+import com.prodia.test.spaceexplorer.presentation.adapter.ArticleListAdapter
+import com.prodia.test.spaceexplorer.presentation.viewmodel.ArticleViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity() : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val articleViewModel: ArticleViewModel by viewModels()
@@ -30,7 +27,7 @@ class MainActivity() : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        getViewModel()
+//        getViewModel()
         setupInformation()
     }
 
@@ -127,16 +124,16 @@ class MainActivity() : AppCompatActivity() {
         imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
 
-    private fun getViewModel(): ArticleViewModel {
-        val database = ArticleDatabase.getDatabase(this)
-        val repository = ArticleRepository(ApiConfig.getApiService(), database.articleDao())
-        val viewModel: ArticleViewModel by viewModels {
-            ArticleViewModelFactory(
-                repository
-            )
-        }
-        return viewModel
-    }
+//    private fun getViewModel(): ArticleViewModel {
+//        val database = ArticleDatabase.getDatabase(this)
+//        val repository = ArticleRepository(ApiConfig.getApiService(), database.articleDao())
+//        val viewModel: ArticleViewModel by viewModels {
+//            ArticleViewModelFactory(
+//                repository
+//            )
+//        }
+//        return viewModel
+//    }
 
     private fun showLoading(state: Boolean) {
         binding.progressBar.visibility = if (state) View.VISIBLE else View.GONE

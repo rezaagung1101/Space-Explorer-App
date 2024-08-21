@@ -2,10 +2,11 @@ package com.prodia.test.spaceexplorer.model.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.prodia.test.spaceexplorer.model.api.ApiResponse
-import com.prodia.test.spaceexplorer.model.api.ApiService
-import com.prodia.test.spaceexplorer.model.data.RecentSearch
-import com.prodia.test.spaceexplorer.model.db.ArticleDao
+import com.prodia.test.spaceexplorer.domain.repository.ArticleRepository
+import com.prodia.test.spaceexplorer.data.source.remote.api.ApiResponse
+import com.prodia.test.spaceexplorer.data.source.remote.api.ApiService
+import com.prodia.test.spaceexplorer.domain.model.RecentSearch
+import com.prodia.test.spaceexplorer.data.source.local.db.ArticleDao
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert
