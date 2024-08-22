@@ -7,12 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.prodia.test.spaceexplorer.domain.model.Article
 import com.prodia.test.spaceexplorer.domain.model.RecentSearch
-import com.prodia.test.spaceexplorer.domain.repository.ArticleRepository
-import com.prodia.test.spaceexplorer.domain.usecase.DeleteAllRecentSearchesUseCase
-import com.prodia.test.spaceexplorer.domain.usecase.GetListArticlesUseCase
-import com.prodia.test.spaceexplorer.domain.usecase.GetRecentSearchesUseCase
-import com.prodia.test.spaceexplorer.domain.usecase.InsertRecentSearchUseCase
-import com.prodia.test.spaceexplorer.domain.usecase.SearchArticlesByTitleUseCase
+import com.prodia.test.spaceexplorer.domain.usecase.recentSearch.DeleteAllRecentSearchesUseCase
+import com.prodia.test.spaceexplorer.domain.usecase.articles.GetListArticlesUseCase
+import com.prodia.test.spaceexplorer.domain.usecase.recentSearch.GetRecentSearchesUseCase
+import com.prodia.test.spaceexplorer.domain.usecase.recentSearch.InsertRecentSearchUseCase
+import com.prodia.test.spaceexplorer.domain.usecase.articles.SearchArticlesByTitleUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

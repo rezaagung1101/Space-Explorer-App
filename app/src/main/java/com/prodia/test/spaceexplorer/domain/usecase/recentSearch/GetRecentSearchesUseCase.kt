@@ -1,4 +1,4 @@
-package com.prodia.test.spaceexplorer.domain.usecase
+package com.prodia.test.spaceexplorer.domain.usecase.recentSearch
 
 import androidx.lifecycle.LiveData
 import com.prodia.test.spaceexplorer.domain.model.RecentSearch
