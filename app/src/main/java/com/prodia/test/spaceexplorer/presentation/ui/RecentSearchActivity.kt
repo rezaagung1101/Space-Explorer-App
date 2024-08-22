@@ -11,14 +11,14 @@ import com.prodia.test.spaceexplorer.R
 import com.prodia.test.spaceexplorer.databinding.ActivityRecentSearchBinding
 import com.prodia.test.spaceexplorer.domain.model.RecentSearch
 import com.prodia.test.spaceexplorer.presentation.adapter.RecentSearchListAdapter
-import com.prodia.test.spaceexplorer.presentation.viewmodel.ArticleViewModel
+import com.prodia.test.spaceexplorer.presentation.viewmodel.RecentSearchViewModel
 import com.prodia.test.spaceexplorer.utils.Helper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RecentSearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRecentSearchBinding
-    private val articleViewModel: ArticleViewModel by viewModels()
+    private val recentSearchViewModel: RecentSearchViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +26,7 @@ class RecentSearchActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         supportActionBar?.title = getString(R.string.recent_search_title)
-//        getViewModel()
-        articleViewModel.apply{
+        recentSearchViewModel.apply{
             recentSearches.observe(this@RecentSearchActivity){ recentSearches ->
                 if (recentSearches != null) {
                     setupInformation(recentSearches)
@@ -47,17 +46,6 @@ class RecentSearchActivity : AppCompatActivity() {
         binding.rvArticles.adapter = RecentSearchListAdapter(recentSearches)
     }
 
-//    private fun getViewModel(): ArticleViewModel {
-//        val database = ArticleDatabase.getDatabase(this)
-//        val repository = ArticleRepository(ApiConfig.getApiService(), database.articleDao())
-//        val viewModel: ArticleViewModel by viewModels {
-//            ArticleViewModelFactory(
-//                repository
-//            )
-//        }
-//        return viewModel
-//    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_detail, menu)
         return super.onCreateOptionsMenu(menu)
@@ -66,7 +54,7 @@ class RecentSearchActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_delete -> {
-                articleViewModel.recentSearches.observe(this){
+                recentSearchViewModel.recentSearches.observe(this){
                     if(it!=null && it.isNotEmpty()){
                         Helper.showDialog(
                             this,
@@ -74,7 +62,7 @@ class RecentSearchActivity : AppCompatActivity() {
                             getString(R.string.cancel),
                             getString(R.string.delete)
                         ) {
-                            articleViewModel.deleteAllRecentSearches()
+                            recentSearchViewModel.deleteAllRecentSearches()
                             Toast.makeText(
                                 this@RecentSearchActivity,
                                 resources.getString(R.string.delete_success_message),

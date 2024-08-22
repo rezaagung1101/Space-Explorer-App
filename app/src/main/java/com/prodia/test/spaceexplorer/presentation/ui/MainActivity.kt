@@ -17,17 +17,18 @@ import com.prodia.test.spaceexplorer.databinding.ActivityMainBinding
 import com.prodia.test.spaceexplorer.domain.model.Article
 import com.prodia.test.spaceexplorer.presentation.adapter.ArticleListAdapter
 import com.prodia.test.spaceexplorer.presentation.viewmodel.ArticleViewModel
+import com.prodia.test.spaceexplorer.presentation.viewmodel.RecentSearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity() : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val articleViewModel: ArticleViewModel by viewModels()
+    private val recentSearchViewModel: RecentSearchViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        getViewModel()
         setupInformation()
     }
 
@@ -96,6 +97,7 @@ class MainActivity() : AppCompatActivity() {
     private fun performSearch() {
         val query = binding.etSearchArticle.text.toString().trim()
         if (query.isNotEmpty()) {
+            recentSearchViewModel.insertRecentSearch(query)
             articleViewModel.searchArticlesByTitle(query)
             hideKeyboard()
         }
@@ -123,17 +125,6 @@ class MainActivity() : AppCompatActivity() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
-
-//    private fun getViewModel(): ArticleViewModel {
-//        val database = ArticleDatabase.getDatabase(this)
-//        val repository = ArticleRepository(ApiConfig.getApiService(), database.articleDao())
-//        val viewModel: ArticleViewModel by viewModels {
-//            ArticleViewModelFactory(
-//                repository
-//            )
-//        }
-//        return viewModel
-//    }
 
     private fun showLoading(state: Boolean) {
         binding.progressBar.visibility = if (state) View.VISIBLE else View.GONE

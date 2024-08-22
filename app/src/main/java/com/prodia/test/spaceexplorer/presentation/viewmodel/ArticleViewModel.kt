@@ -6,11 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.prodia.test.spaceexplorer.domain.model.Article
-import com.prodia.test.spaceexplorer.domain.model.RecentSearch
-import com.prodia.test.spaceexplorer.domain.usecase.recentSearch.DeleteAllRecentSearchesUseCase
 import com.prodia.test.spaceexplorer.domain.usecase.articles.GetListArticlesUseCase
-import com.prodia.test.spaceexplorer.domain.usecase.recentSearch.GetRecentSearchesUseCase
-import com.prodia.test.spaceexplorer.domain.usecase.recentSearch.InsertRecentSearchUseCase
 import com.prodia.test.spaceexplorer.domain.usecase.articles.SearchArticlesByTitleUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -20,9 +16,6 @@ import javax.inject.Inject
 class ArticleViewModel @Inject constructor(
     private val getListArticlesUseCase: GetListArticlesUseCase,
     private val searchArticlesByTitleUseCase: SearchArticlesByTitleUseCase,
-    private val insertRecentSearchUseCase: InsertRecentSearchUseCase,
-    private val deleteAllRecentSearchesUseCase: DeleteAllRecentSearchesUseCase,
-    private val getRecentSearchesUseCase: GetRecentSearchesUseCase
 ) : ViewModel() {
     private val _filteredArticles = MutableLiveData<List<Article>>()
     val filteredArticles: LiveData<List<Article>> = _filteredArticles
@@ -30,8 +23,6 @@ class ArticleViewModel @Inject constructor(
     val articles: LiveData<List<Article>> = _articles
     private val _newsSites = MutableLiveData<List<String>>()
     val newsSites: LiveData<List<String>> = _newsSites
-    private val _recentSearches = getRecentSearchesUseCase.execute()
-    val recentSearches: LiveData<List<RecentSearch>> = _recentSearches
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
     private val _showNoInternetSnackbar = MutableLiveData<Boolean>()
@@ -72,7 +63,6 @@ class ArticleViewModel @Inject constructor(
                     val articles = response.body()!!.results
                     setArticles(articles)
                     _newsSites.value = articles.map { it.news_site }.distinct()
-                    insertRecentSearchUseCase.execute(title)
                 } else {
 //                    Log.d("TAG", "GET Article Error Code: ${response.code()}")
                 }
@@ -91,8 +81,6 @@ class ArticleViewModel @Inject constructor(
             _filteredArticles.value = _articles.value?.filter { it.news_site == newsSite }
         }
     }
-
-    fun deleteAllRecentSearches() = deleteAllRecentSearchesUseCase.execute()
 
     fun setSnackBarValue(status: Boolean) {
         _showNoInternetSnackbar.value = status
