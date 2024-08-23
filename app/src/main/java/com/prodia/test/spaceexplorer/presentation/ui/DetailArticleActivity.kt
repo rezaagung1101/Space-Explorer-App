@@ -36,7 +36,8 @@ class DetailArticleActivity : AppCompatActivity() {
             }else{
                 tvPublishedTime.text = article.published_at
             }
-            tvSummary.text = Helper.extractSummary(article.summary)
+//            tvSummary.text = Helper.extractSummary(article.summary)
+            tvSummary.text = article.summary
             btnBack.setOnClickListener {
                 onBackPressed()
             }
