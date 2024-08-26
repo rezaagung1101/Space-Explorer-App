@@ -19,7 +19,7 @@ class ApiConfig { //for ApiService configuration and instantiation
                 .addInterceptor(loggingInterceptor)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl(BuildConfig.url)
+                .baseUrl(BuildConfig.spaceflight_api_url)
                 .addConverterFactory(GsonConverterFactory.create()) //Convert JSON to Java object
                 .client(client)
                 .build()
