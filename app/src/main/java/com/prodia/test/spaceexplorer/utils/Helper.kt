@@ -6,15 +6,25 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.prodia.test.spaceexplorer.R
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.Locale
+import java.util.TimeZone
 
 object Helper {
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun formatPublishedAt(publishedAt: String): String {
-        val localDateTime = LocalDateTime.parse(publishedAt, DateTimeFormatter.ISO_DATE_TIME)
-        return localDateTime.format(DateTimeFormatter.ofPattern("d MMMM yyyy, HH:mm"))
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val localDateTime = LocalDateTime.parse(publishedAt, DateTimeFormatter.ISO_DATE_TIME)
+            localDateTime.format(DateTimeFormatter.ofPattern("d MMMM yyyy, HH:mm"))
+        } else {
+            val isoFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+            isoFormatter.timeZone = TimeZone.getTimeZone("UTC")
+            val date = isoFormatter.parse(publishedAt)
+            val outputFormatter = SimpleDateFormat("d MMMM yyyy, HH:mm", Locale.getDefault())
+            outputFormatter.format(date)
+        }
     }
 
     fun extractSummary(summary: String): String {

@@ -22,6 +22,7 @@ android {
         versionCode 1
         versionName "1.0"
         buildConfigField("String", "spaceflight_api_url", "\"${property('spaceflight_api_url')}\"")
+        buildConfigField("String", "public_key_hash", "\"${property('public_key_hash')}\"")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

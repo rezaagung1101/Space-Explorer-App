@@ -24,18 +24,15 @@ class DetailArticleActivity : AppCompatActivity() {
         supportActionBar?.title = getString(R.string.detail_article)
     }
 
-    private fun setupInformation(article: Article){
+    private fun setupInformation(article: Article) {
         binding.apply {
             Glide.with(this@DetailArticleActivity)
                 .load(article.image_url)
                 .into(ivArticle)
             tvNewsSite.text = "©  " + article.news_site
             tvArticleTitle.text = article.title
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                tvPublishedTime.text = Helper.formatPublishedAt(article.published_at)
-            }else{
-                tvPublishedTime.text = article.published_at
-            }
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            tvPublishedTime.text = Helper.formatPublishedAt(article.published_at)
 //            tvSummary.text = Helper.extractSummary(article.summary)
             tvSummary.text = article.summary
             btnBack.setOnClickListener {
