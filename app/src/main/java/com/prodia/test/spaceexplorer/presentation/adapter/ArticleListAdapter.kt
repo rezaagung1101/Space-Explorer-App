@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.prodia.test.spaceexplorer.databinding.CardArticleItemBinding
 import com.prodia.test.spaceexplorer.domain.model.Article
-import com.prodia.test.spaceexplorer.presentation.ui.DetailArticleActivity
+import com.prodia.test.spaceexplorer.presentation.ui.ArticleWebViewActivity
 import com.prodia.test.spaceexplorer.utils.Constants
 
 
@@ -39,7 +39,7 @@ class ArticleListAdapter(private val listData: List<Article>) :
                     }
                 }
                 this.setOnClickListener {
-                    val intent = Intent(context, DetailArticleActivity::class.java)
+                    val intent = Intent(context, ArticleWebViewActivity::class.java)
                     intent.putExtra(Constants.article, data)
                     context.startActivity(intent)
                 }

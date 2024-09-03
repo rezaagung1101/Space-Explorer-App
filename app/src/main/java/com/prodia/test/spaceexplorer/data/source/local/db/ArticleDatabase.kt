@@ -4,15 +4,23 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.prodia.test.spaceexplorer.domain.model.RecentSearch
+
+val MIGRATION_1_2 = object : Migration(1, 2) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        // example: adding new column to "recent_searach" table
+        database.execSQL("ALTER TABLE recent_search ADD COLUMN category TEXT NOT NULL DEFAULT ''")
+    }
+}
 
 @Database(
     entities = [RecentSearch::class],
-    version = 1,
-    exportSchema = false
+    version = 1, //adjust the version of database
+    exportSchema = false,
 )
 abstract class ArticleDatabase : RoomDatabase() {
-
     abstract fun articleDao(): ArticleDao
 
     companion object {
@@ -26,7 +34,8 @@ abstract class ArticleDatabase : RoomDatabase() {
                     context.applicationContext,
                     ArticleDatabase::class.java, "article_database"
                 )
-                    .fallbackToDestructiveMigration()
+//                    .fallbackToDestructiveMigration()
+//                    .addMigrations(MIGRATION_1_2)
                     .build()
                     .also { INSTANCE = it }
             }

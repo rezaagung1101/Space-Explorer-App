@@ -111,6 +111,8 @@ dependencies {
     // Hilt Annotation Processor
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
+    //EncryptedSharedPreferences
+    implementation 'androidx.security:security-crypto:1.1.0-alpha03'
 }
 
 kapt {

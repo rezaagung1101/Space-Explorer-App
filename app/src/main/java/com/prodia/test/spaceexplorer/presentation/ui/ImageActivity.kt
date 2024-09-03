@@ -1,7 +1,7 @@
 package com.prodia.test.spaceexplorer.presentation.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.prodia.test.spaceexplorer.R
 import com.prodia.test.spaceexplorer.databinding.ActivityImageBinding

@@ -3,8 +3,6 @@ package com.prodia.test.spaceexplorer.di
 import android.content.Context
 import com.prodia.test.spaceexplorer.data.source.local.db.ArticleDao
 import com.prodia.test.spaceexplorer.data.source.local.db.ArticleDatabase
-import com.prodia.test.spaceexplorer.data.source.remote.api.ApiConfig
-import com.prodia.test.spaceexplorer.data.source.remote.api.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

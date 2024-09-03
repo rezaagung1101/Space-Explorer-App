@@ -37,5 +37,7 @@ data class Event(
 data class RecentSearch(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val query: String
+    val query: String,
+//    val category: String
 )
+
