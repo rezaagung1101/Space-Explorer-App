@@ -1,0 +1,36 @@
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = "0.8.7"
+}
+
+task jacocoTestReport(type: JacocoReport) {
+    dependsOn 'testDebugUnitTest'
+
+    reports {
+        xml.required = true
+        csv.required = false
+        html.outputLocation = file("${buildDir}/jacocoHtml")
+    }
+
+    def fileFilter = [
+            '**/R.class',
+            '**/R$*.class',
+            '**/BuildConfig.*',
+            '**/Manifest*.*',
+            '**/*Test*.*',
+            '**/Dagger*.*',
+            '**/*_Factory*.*',
+            '**/*_Provide*Factory*.*',
+            '**/com/prodia/test/spaceexplorer/ui/**',
+            '**/com/prodia/test/spaceexplorer/adapter/**',
+
+    ]
+
+    classDirectories.setFrom(fileTree(dir: "$buildDir/tmp/kotlin-classes/debug", excludes: fileFilter))
+    sourceDirectories.setFrom(files(["src/main/java", "src/main/kotlin"]))
+    executionData.setFrom(fileTree(dir: "$buildDir", includes: [
+            "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec",
+            "jacoco/testDebugUnitTest.exec"
+    ]))
+}
