@@ -6,8 +6,8 @@ import android.webkit.WebSettings
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import com.prodia.test.spaceexplorer.databinding.ActivityArticleWebViewBinding
-import com.prodia.test.spaceexplorer.domain.model.Article
 import com.prodia.test.spaceexplorer.utils.Constants
+import com.spaceexplorer.domain.model.Article
 
 class ArticleWebViewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityArticleWebViewBinding

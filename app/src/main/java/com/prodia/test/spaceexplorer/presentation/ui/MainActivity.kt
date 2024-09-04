@@ -14,10 +14,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.prodia.test.spaceexplorer.databinding.ActivityMainBinding
-import com.prodia.test.spaceexplorer.domain.model.Article
 import com.prodia.test.spaceexplorer.presentation.adapter.ArticleListAdapter
 import com.prodia.test.spaceexplorer.presentation.viewmodel.ArticleViewModel
 import com.prodia.test.spaceexplorer.presentation.viewmodel.RecentSearchViewModel
+import com.spaceexplorer.domain.model.Article
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

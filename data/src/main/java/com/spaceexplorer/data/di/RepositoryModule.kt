@@ -1,9 +1,9 @@
-package com.prodia.test.spaceexplorer.di
+package com.spaceexplorer.data.di
 
-import com.prodia.test.spaceexplorer.data.repository.ArticleRepositoryImpl
-import com.prodia.test.spaceexplorer.data.source.local.db.ArticleDao
-import com.prodia.test.spaceexplorer.data.source.remote.api.ApiService
-import com.prodia.test.spaceexplorer.domain.repository.ArticleRepository
+import com.spaceexplorer.data.repository.ArticleRepositoryImpl
+import com.spaceexplorer.data.source.local.db.ArticleDao
+import com.spaceexplorer.data.source.remote.api.ApiService
+import com.spaceexplorer.domain.repository.ArticleRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

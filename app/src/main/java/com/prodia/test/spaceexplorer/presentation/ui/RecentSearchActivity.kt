@@ -9,10 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prodia.test.spaceexplorer.R
 import com.prodia.test.spaceexplorer.databinding.ActivityRecentSearchBinding
-import com.prodia.test.spaceexplorer.domain.model.RecentSearch
 import com.prodia.test.spaceexplorer.presentation.adapter.RecentSearchListAdapter
 import com.prodia.test.spaceexplorer.presentation.viewmodel.RecentSearchViewModel
 import com.prodia.test.spaceexplorer.utils.Helper
+import com.spaceexplorer.domain.model.RecentSearch
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

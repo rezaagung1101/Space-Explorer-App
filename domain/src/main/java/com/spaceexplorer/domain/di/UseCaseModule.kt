@@ -1,11 +1,12 @@
-package com.prodia.test.spaceexplorer.di
+package com.spaceexplorer.domain.di
 
-import com.prodia.test.spaceexplorer.domain.repository.ArticleRepository
-import com.prodia.test.spaceexplorer.domain.usecase.articles.GetListArticlesUseCase
-import com.prodia.test.spaceexplorer.domain.usecase.articles.SearchArticlesByTitleUseCase
-import com.prodia.test.spaceexplorer.domain.usecase.recentSearch.DeleteAllRecentSearchesUseCase
-import com.prodia.test.spaceexplorer.domain.usecase.recentSearch.GetRecentSearchesUseCase
-import com.prodia.test.spaceexplorer.domain.usecase.recentSearch.InsertRecentSearchUseCase
+
+import com.spaceexplorer.domain.repository.ArticleRepository
+import com.spaceexplorer.domain.usecase.articles.GetListArticlesUseCase
+import com.spaceexplorer.domain.usecase.articles.SearchArticlesByTitleUseCase
+import com.spaceexplorer.domain.usecase.recentSearch.DeleteAllRecentSearchesUseCase
+import com.spaceexplorer.domain.usecase.recentSearch.GetRecentSearchesUseCase
+import com.spaceexplorer.domain.usecase.recentSearch.InsertRecentSearchUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

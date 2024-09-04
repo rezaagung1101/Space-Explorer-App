@@ -22,4 +22,5 @@ object Version {
     const val testRulesVersion = "1.5.0"
     const val junitKtxVersion = "1.2.1"
     const val extJunitVersion = "1.1.5"
+    const val hiltVersion = "2.44"
 }

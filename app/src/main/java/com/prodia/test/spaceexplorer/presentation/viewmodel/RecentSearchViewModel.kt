@@ -3,10 +3,10 @@ package com.prodia.test.spaceexplorer.presentation.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.prodia.test.spaceexplorer.domain.model.RecentSearch
-import com.prodia.test.spaceexplorer.domain.usecase.recentSearch.DeleteAllRecentSearchesUseCase
-import com.prodia.test.spaceexplorer.domain.usecase.recentSearch.GetRecentSearchesUseCase
-import com.prodia.test.spaceexplorer.domain.usecase.recentSearch.InsertRecentSearchUseCase
+import com.spaceexplorer.domain.model.RecentSearch
+import com.spaceexplorer.domain.usecase.recentSearch.DeleteAllRecentSearchesUseCase
+import com.spaceexplorer.domain.usecase.recentSearch.GetRecentSearchesUseCase
+import com.spaceexplorer.domain.usecase.recentSearch.InsertRecentSearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

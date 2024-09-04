@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.prodia.test.spaceexplorer.databinding.CardArticleItemBinding
-import com.prodia.test.spaceexplorer.domain.model.Article
 import com.prodia.test.spaceexplorer.presentation.ui.ArticleWebViewActivity
 import com.prodia.test.spaceexplorer.utils.Constants
+import com.spaceexplorer.domain.model.Article
 
 
 class ArticleListAdapter(private val listData: List<Article>) :

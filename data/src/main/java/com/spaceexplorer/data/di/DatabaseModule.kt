@@ -1,8 +1,8 @@
-package com.prodia.test.spaceexplorer.di
+package com.spaceexplorer.data.di
 
 import android.content.Context
-import com.prodia.test.spaceexplorer.data.source.local.db.ArticleDao
-import com.prodia.test.spaceexplorer.data.source.local.db.ArticleDatabase
+import com.spaceexplorer.data.source.local.db.ArticleDao
+import com.spaceexplorer.data.source.local.db.ArticleDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,7 +1,7 @@
-package com.prodia.test.spaceexplorer.di
+package com.spaceexplorer.data.di
 
-import com.prodia.test.spaceexplorer.data.source.remote.api.ApiConfig
-import com.prodia.test.spaceexplorer.data.source.remote.api.ApiService
+import com.spaceexplorer.data.source.remote.api.ApiConfig
+import com.spaceexplorer.data.source.remote.api.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.prodia.test.spaceexplorer.domain.model.Article
-import com.prodia.test.spaceexplorer.domain.usecase.articles.GetListArticlesUseCase
-import com.prodia.test.spaceexplorer.domain.usecase.articles.SearchArticlesByTitleUseCase
+import com.spaceexplorer.domain.model.Article
+import com.spaceexplorer.domain.usecase.articles.GetListArticlesUseCase
+import com.spaceexplorer.domain.usecase.articles.SearchArticlesByTitleUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

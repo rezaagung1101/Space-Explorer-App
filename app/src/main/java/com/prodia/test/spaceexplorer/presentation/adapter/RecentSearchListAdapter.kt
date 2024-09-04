@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.prodia.test.spaceexplorer.databinding.RecentSearchItemBinding
-import com.prodia.test.spaceexplorer.domain.model.RecentSearch
+import com.spaceexplorer.domain.model.RecentSearch
 
 class RecentSearchListAdapter(private val listData: List<RecentSearch>) :
     RecyclerView.Adapter<RecentSearchListAdapter.ViewHolder>() {

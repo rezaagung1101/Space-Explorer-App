@@ -48,10 +48,10 @@ object TestDependencies {
 }
 
 //// Hilt Dependencies
-//object HiltDependencies {
-//    const val hiltAndroid = "com.google.dagger:hilt-android:${Version.hiltVersion}"
-//    const val hiltCompiler = "com.google.dagger:hilt-compiler:${Version.hiltVersion}"
-//}
+object HiltDependencies {
+    const val hiltAndroid = "com.google.dagger:hilt-android:${Version.hiltVersion}"
+    const val hiltCompiler = "com.google.dagger:hilt-compiler:${Version.hiltVersion}"
+}
 
 //// Coroutine Dependencies
 object CoroutineDependencies {

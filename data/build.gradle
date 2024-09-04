@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -48,10 +50,13 @@ dependencies {
     implementation project(path: ':domain')
 
     implementation DatabaseDependencies.roomCommon
-    implementation DatabaseDependencies.roomCompiler
+    kapt DatabaseDependencies.roomCompiler
     implementation DatabaseDependencies.roomKtx
 
     implementation NetworkDependencies.retrofit
     implementation NetworkDependencies.retrofitGsonConverter
     implementation NetworkDependencies.okHttpLoggingInterceptor
+
+    implementation HiltDependencies.hiltAndroid
+    kapt HiltDependencies.hiltCompiler
 }

@@ -3,7 +3,7 @@ package com.prodia.test.spaceexplorer.utils
 import android.content.Context
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
-import com.prodia.test.spaceexplorer.domain.model.Article
+import com.spaceexplorer.domain.model.Article
 
 class UserPreference(context: Context) {
     val masterKey = MasterKey.Builder(context)

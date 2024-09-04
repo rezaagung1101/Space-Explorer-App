@@ -1,15 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-parcelize'
     id 'kotlin-kapt'
-    id 'jacoco'
     id 'com.google.dagger.hilt.android'
 }
 
-jacoco {
-    toolVersion = "0.8.7"
-}
 
 android {
     namespace 'com.prodia.test.spaceexplorer'
@@ -55,6 +50,8 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.7.0'
@@ -78,19 +75,17 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.8.4"
 
     //api connect
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
-    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+    implementation NetworkDependencies.retrofit
 
     //image
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     //db
-    implementation 'androidx.room:room-ktx:2.4.2'
-    implementation 'androidx.room:room-common:2.4.2'
-    kapt 'androidx.room:room-compiler:2.4.2'
-    androidTestImplementation "androidx.room:room-testing:2.5.0"
+//    implementation DatabaseDependencies.roomCommon
+//    kapt DatabaseDependencies.roomCompiler
+//    implementation DatabaseDependencies.roomKtx
+//    androidTestImplementation "androidx.room:room-testing:2.5.0"
 
     // Mockito
     testImplementation 'org.mockito:mockito-core:4.0.0'
@@ -106,10 +101,8 @@ dependencies {
     androidTestImplementation 'androidx.test:core:1.5.0'
 
     // Dagger Hilt
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    
-    // Hilt Annotation Processor
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    implementation HiltDependencies.hiltAndroid
+    kapt HiltDependencies.hiltCompiler
 
     //EncryptedSharedPreferences
     implementation 'androidx.security:security-crypto:1.1.0-alpha03'
