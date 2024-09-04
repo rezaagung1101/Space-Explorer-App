@@ -1,8 +1,8 @@
-package com.prodia.test.spaceexplorer.domain.repository
+package com.spaceexplorer.domain.repository
 
 import androidx.lifecycle.LiveData
-import com.prodia.test.spaceexplorer.data.source.remote.api.ApiResponse
-import com.prodia.test.spaceexplorer.domain.model.RecentSearch
+import com.spaceexplorer.domain.model.ApiResponse
+import com.spaceexplorer.domain.model.RecentSearch
 import retrofit2.Response
 
 interface ArticleRepository {
