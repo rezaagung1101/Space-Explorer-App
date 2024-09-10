@@ -9,8 +9,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.CertificatePinner
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -24,12 +26,29 @@ object NetworkModule {
 
     @Provides
     @Singleton
+    @Named("UserAgentInterceptor")
+    fun provideUserAgentInterceptor(): Interceptor {
+        return ApiConfig.provideUserAgentInterceptor()
+    }
+
+    @Provides
+    @Singleton
+    @Named("ChuckerInterceptor")
+    fun provideChuckerInterceptor(
+        @ApplicationContext context: Context,
+    ): Interceptor {
+        return ApiConfig.provideChuckerInterceptor(context)
+    }
+
+    @Provides
+    @Singleton
     fun provideOkHttpClient(
         certificatePinner: CertificatePinner,
-        @ApplicationContext context: Context,
+        @Named("ChuckerInterceptor") chuckerInterceptor: Interceptor,
+        @Named("UserAgentInterceptor") userAgentInterceptor: Interceptor,
     ): OkHttpClient {
         return ApiConfig.provideOkHttpClient(
-            certificatePinner, context
+            certificatePinner, chuckerInterceptor, userAgentInterceptor
         )
     }
 
@@ -44,5 +63,4 @@ object NetworkModule {
     fun provideApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
-
 }

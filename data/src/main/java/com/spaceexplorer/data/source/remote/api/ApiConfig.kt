@@ -1,6 +1,7 @@
 package com.spaceexplorer.data.source.remote.api
 
 import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.spaceexplorer.data.BuildConfig
 import okhttp3.CertificatePinner
@@ -13,25 +14,21 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 object ApiConfig {
-    fun provideOkHttpClient(certificatePinner: CertificatePinner, context: Context): OkHttpClient {
-        val loggingInterceptor = if(BuildConfig.DEBUG) {
+    fun provideOkHttpClient(
+        certificatePinner: CertificatePinner,
+        chuckerInterceptor: Interceptor, // add interceptor as parameter
+        userAgentInterceptor: Interceptor,
+    ): OkHttpClient {
+        val loggingInterceptor = if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
         } else {
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
         }
 
-        val userAgentInterceptor = Interceptor { chain ->
-            val originalRequest: Request = chain.request()
-            val requestWithUserAgent: Request = originalRequest.newBuilder()
-                .header("User-Agent", "SpaceExplorer-App/1.0 (Prodia)")
-                .build()
-            chain.proceed(requestWithUserAgent)
-        }
-
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(chuckerInterceptor) //add chucker interceptor
             .addInterceptor(userAgentInterceptor)
-            .addInterceptor(ChuckerInterceptor.Builder(context).build())
             .certificatePinner(certificatePinner)
             .build()
     }
@@ -52,6 +49,25 @@ object ApiConfig {
             .add(spaceFlightUrl, "sha256/$hash")
             .build()
     }
+
+    fun provideChuckerInterceptor(context: Context): Interceptor {
+        return ChuckerInterceptor.Builder(context)
+            .collector(ChuckerCollector(context))
+            .maxContentLength(250000L)
+            .redactHeaders(emptySet())
+            .alwaysReadResponseBody(false)
+            .build()
+    }
+
+    fun provideUserAgentInterceptor() =
+        Interceptor { chain ->
+            val originalRequest: Request = chain.request()
+            val requestWithUserAgent: Request = originalRequest.newBuilder()
+                .header("User-Agent", "SpaceExplorer-App/1.0 (Prodia)")
+                .build()
+            chain.proceed(requestWithUserAgent)
+        }
+
 }
 
 
