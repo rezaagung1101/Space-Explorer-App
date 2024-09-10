@@ -1,4 +1,5 @@
 object Version {
+    const val chuckerVersion = "3.5.2"
     const val coreKtxVersion = "1.8.0"
     const val appCompatVersion = "1.7.0"
     const val materialVersion = "1.5.0"

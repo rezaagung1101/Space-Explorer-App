@@ -51,7 +51,7 @@ class RecentSearchActivity : AppCompatActivity() {
 
     private fun getViewModel(): ArticleViewModel {
         val database = ArticleDatabase.getDatabase(this)
-        val repository = ArticleRepository(ApiConfig.getApiService(), database.articleDao())
+        val repository = ArticleRepository(ApiConfig.getApiService(this), database.articleDao())
         val viewModel: ArticleViewModel by viewModels {
             ArticleViewModelFactory(
                 repository

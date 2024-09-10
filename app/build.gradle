@@ -73,6 +73,9 @@ dependencies {
     implementation NetworkDependencies.retrofitGsonConverter
     implementation NetworkDependencies.okHttpLoggingInterceptor
 
+    debugImplementation NetworkDependencies.chuckerDebug
+    releaseImplementation NetworkDependencies.chuckerRelease
+
     //image
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
