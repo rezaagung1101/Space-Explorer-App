@@ -34,7 +34,7 @@ abstract class ArticleDatabase : RoomDatabase() {
                     context.applicationContext,
                     ArticleDatabase::class.java, "article_database"
                 )
-//                    .fallbackToDestructiveMigration()
+                    .fallbackToDestructiveMigration()
 //                    .addMigrations(MIGRATION_1_2)
                     .build()
                     .also { INSTANCE = it }

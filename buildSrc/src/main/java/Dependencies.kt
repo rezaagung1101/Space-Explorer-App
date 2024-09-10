@@ -15,6 +15,14 @@ object NetworkDependencies {
     const val retrofit = "com.squareup.retrofit2:retrofit:${Version.retrofitVersion}"
     const val retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:${Version.retrofitVersion}"
     const val okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Version.okHttpInterceptorVersion}"
+    const val chuckerDebug = "com.github.chuckerteam.chucker:library:${Version.chuckerVersion}"
+    const val chuckerRelease = "com.github.chuckerteam.chucker:library-no-op:${Version.chuckerVersion}" //memastikan Chucker tidak mengumpulkan data apapun saat aplikasi di-build dalam mode release.
+}
+
+object HttpLogDependencies {
+//    const val userAgentCooper = "com.github.danielceinos:Cooper:${Version.userAgentInterceptor}"
+    const val chuckerDebug = "com.github.chuckerteam.chucker:library:${Version.chuckerVersion}"
+    const val chuckerRelease = "com.github.chuckerteam.chucker:library-no-op:${Version.chuckerVersion}"
 }
 
 // Image Dependencies

@@ -23,4 +23,5 @@ object Version {
     const val junitKtxVersion = "1.2.1"
     const val extJunitVersion = "1.1.5"
     const val hiltVersion = "2.44"
+    const val chuckerVersion = "3.5.2"
 }

@@ -1,5 +1,7 @@
 package com.spaceexplorer.data.source.remote.api
 
+import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.spaceexplorer.data.BuildConfig
 import okhttp3.CertificatePinner
 import okhttp3.Interceptor
@@ -10,45 +12,46 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class ApiConfig { //for ApiService configuration and instantiation
-    companion object{
-        fun getApiService() : ApiService {
-            val hash = BuildConfig.public_key_hash
-            val spaceFlightUrl = BuildConfig.spaceflight_api_url
-            val certificatePinner = CertificatePinner.Builder()
-                .add(spaceFlightUrl, "sha256/$hash")
-                .build()
-
-            val loggingInterceptor = if(BuildConfig.DEBUG) {
-                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-            } else {
-                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
-            }
-//            val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-
-            val userAgentInterceptor = Interceptor { chain ->
-                val originalRequest: Request = chain.request()
-                val requestWithUserAgent: Request = originalRequest.newBuilder()
-                    .header("User-Agent", "SpaceExplorer-App/1.0 (Prodia)")
-                    .build()
-                chain.proceed(requestWithUserAgent)
-            }
-
-            val client = OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .addInterceptor(userAgentInterceptor) //add interceptor di sini
-                .certificatePinner(certificatePinner) //ssl pining
-                .build()
-
-            val retrofit = Retrofit.Builder()
-                .baseUrl("https://$spaceFlightUrl")
-                .addConverterFactory(GsonConverterFactory.create()) //Convert JSON to Java object
-                .client(client)
-                .build()
-            return retrofit.create(ApiService::class.java)
+object ApiConfig {
+    fun provideOkHttpClient(certificatePinner: CertificatePinner, context: Context): OkHttpClient {
+        val loggingInterceptor = if(BuildConfig.DEBUG) {
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        } else {
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
         }
+
+        val userAgentInterceptor = Interceptor { chain ->
+            val originalRequest: Request = chain.request()
+            val requestWithUserAgent: Request = originalRequest.newBuilder()
+                .header("User-Agent", "SpaceExplorer-App/1.0 (Prodia)")
+                .build()
+            chain.proceed(requestWithUserAgent)
+        }
+
+        return OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .addInterceptor(userAgentInterceptor)
+            .addInterceptor(ChuckerInterceptor.Builder(context).build())
+            .certificatePinner(certificatePinner)
+            .build()
     }
 
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        val spaceFlightUrl = BuildConfig.spaceflight_api_url
+        return Retrofit.Builder()
+            .baseUrl("https://$spaceFlightUrl")
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
+    }
+
+    fun provideCertificatePinner(): CertificatePinner {
+        val hash = BuildConfig.public_key_hash
+        val spaceFlightUrl = BuildConfig.spaceflight_api_url
+        return CertificatePinner.Builder()
+            .add(spaceFlightUrl, "sha256/$hash")
+            .build()
+    }
 }
 
 

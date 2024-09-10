@@ -49,6 +49,9 @@ dependencies {
     implementation NetworkDependencies.retrofit
     implementation NetworkDependencies.retrofitGsonConverter
     implementation NetworkDependencies.okHttpLoggingInterceptor
+    
+    debugImplementation NetworkDependencies.chuckerDebug
+    releaseImplementation NetworkDependencies.chuckerRelease
 
     implementation HiltDependencies.hiltAndroid
     kapt HiltDependencies.hiltCompiler
